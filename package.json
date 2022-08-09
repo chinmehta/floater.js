@@ -1,0 +1,23 @@
+{
+  "name": "floater",
+  "version": "1.0.0",
+  "description": "A lightweight Javascript library for creating text float animation.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chinmehta/floater.js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chinmehta/floater.js/issues"
+  },
+  "homepage": "https://github.com/chinmehta/floater.js#readme",
+  "dependencies": {
+    "lit": "^2.2.8",
+    "typescript": "^4.7.4"
+  }
+}
