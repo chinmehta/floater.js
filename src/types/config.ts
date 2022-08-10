@@ -6,7 +6,7 @@ export default interface FloaterConfig {
     containerSelector: string,
     classes: string[],
     colors: string[],
-    minSize: number,
-    maxSize: number,
+    minTextSize: number,
+    maxTextSize: number,
     rotation: boolean
 }
