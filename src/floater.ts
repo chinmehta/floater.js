@@ -39,6 +39,7 @@ export class Floater extends LitElement {
   textValuesContainer: Array<any>;
   initialSpaceAvailableForLetter: Array<any>;
   continuousAnimationInterval: any;
+  initialSpaceCalculation:boolean = false;
 
   /*
    * Functions
@@ -65,6 +66,7 @@ export class Floater extends LitElement {
     this.textValuesContainer.map((element, index) =>
       this.moveTextRandomPosition(element, index)
     );
+    this.initialSpaceCalculation = true;
   }
 
   /*
@@ -109,7 +111,7 @@ export class Floater extends LitElement {
    * @returns
    */
   getRandomPositionForElement(element: HTMLElement, index: number) {
-    this.initialSpaceAvailableForLetter.length
+    this.initialSpaceCalculation
       ? null
       : this.calculateAvailableSpace(element);
 
