@@ -1,8 +1,6 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
 
-import FloaterConfig from "./types/config";
-
 @customElement("floater")
 export class Floater extends LitElement {
 
@@ -11,7 +9,7 @@ export class Floater extends LitElement {
    */
 
   @property()
-  userInput: FloaterConfig = {
+  userInput = {
     data: ["Word", "Word2"],
     startTransitionTimeInMs: 5000,
     stopTransitionTimeInMs: 500,
@@ -33,6 +31,12 @@ export class Floater extends LitElement {
   continuousAnimationInterval: any;
   initialSpaceCalculation:boolean = false;
   CLASS_NAME_FOR_FLOAT_ELEMENTS = "floating-text-value";
+
+
+  connectedCallback() {
+    super.connectedCallback()
+    this.createMovableListOnLoad();
+  }
 
   /*
    * Functions
