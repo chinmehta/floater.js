@@ -1,12 +1,12 @@
 export default interface FloaterConfig {
     data: string[],
-    startTransitionTime: number,
-    stopTransitionTime: number,
+    startTransitionTimeInMs: number,
+    stopTransitionTimeInMs: number,
     transitionName: string,
     containerSelector: string,
     classes: string[],
     colors: string[],
-    minTextSize: number,
-    maxTextSize: number,
+    minTextSizeInPx: number,
+    maxTextSizeInPx: number,
     rotation: boolean
 }

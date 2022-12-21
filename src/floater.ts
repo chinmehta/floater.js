@@ -5,14 +5,6 @@ import FloaterConfig from "./types/config";
 
 @customElement("floater")
 export class Floater extends LitElement {
-  /*
-   * Define scoped styles right wiuth your component, in plain CSS
-   */
-  static styles = css`
-    :host {
-      color: blue;
-    }
-  `;
 
   /*
    * Declare reactive properties
@@ -21,14 +13,14 @@ export class Floater extends LitElement {
   @property()
   userInput: FloaterConfig = {
     data: ["Word", "Word2"],
-    startTransitionTime: 5000,
-    stopTransitionTime: 500,
+    startTransitionTimeInMs: 5000,
+    stopTransitionTimeInMs: 500,
     transitionName: "ease-out",
     containerSelector: ".section-text-container",
     classes: [],
     colors: ["#000"],
-    minTextSize: 20,
-    maxTextSize: 20,
+    minTextSizeInPx: 20,
+    maxTextSizeInPx: 20,
     rotation: false,
   };
 
@@ -46,10 +38,11 @@ export class Floater extends LitElement {
    */
 
   startUntilStop() {
+    this.stopTextAnimation();
     this.startTextAnimation();
     this.continuousAnimationInterval = setInterval(() => {
       this.startTextAnimation();
-    }, this.userInput.startTransitionTime * 0.9);
+    }, this.userInput.startTransitionTimeInMs * 0.9);
   }
 
   stopTextAnimation() {
@@ -75,7 +68,7 @@ export class Floater extends LitElement {
    * @param {number} index
    */
   moveTextRandomPosition(element: HTMLElement, index: number) {
-    const [ELEMENT_Y, ELEMENT_X] = this.getRandomPositionForElement(
+    const [ELEMENT_Y, ELEMENT_X] = this.getRandomPositionToMove(
       element,
       index
     );
@@ -86,7 +79,7 @@ export class Floater extends LitElement {
 
     this.userInput.rotation ? (element.style.transform = `rotate(${rotate}deg)`) : "";
     element.style.transition =
-      this.userInput.startTransitionTime + "ms " + this.userInput.transitionName;
+      this.userInput.startTransitionTimeInMs + "ms " + this.userInput.transitionName;
     element.style.top = ELEMENT_Y + "px";
     element.style.left = ELEMENT_X + "px";
   }
@@ -97,7 +90,7 @@ export class Floater extends LitElement {
    */
   moveTextOrigionalPosition(element: HTMLElement) {
     element.style.transition =
-      this.userInput.stopTransitionTime + "ms " + this.userInput.transitionName;
+      this.userInput.stopTransitionTimeInMs + "ms " + this.userInput.transitionName;
     element.style.top = "0";
     element.style.left = "0";
     element.style.transform = "rotate(0deg)";
@@ -110,7 +103,7 @@ export class Floater extends LitElement {
    * @param {number} - index
    * @returns
    */
-  getRandomPositionForElement(element: HTMLElement, index: number) {
+  getRandomPositionToMove(element: HTMLElement, index: number) {
     this.initialSpaceCalculation
       ? null
       : this.calculateAvailableSpace(element);
@@ -156,10 +149,10 @@ export class Floater extends LitElement {
    * Adding initial styles for alignment
    * Appending node to parent element
    */
-  createDataWordElements(word: string = "") {
+  createMovableElementForText(word: string = "") {
     const span = document.createElement("span");
     span.style.transition =
-      this.userInput.startTransitionTime + "ms " + this.userInput.transitionName;
+      this.userInput.startTransitionTimeInMs + "ms " + this.userInput.transitionName;
     span.innerHTML = word.replaceAll(" ", "&nbsp");
     // TODO: check for userInput.classes array
     // span.className = classList.push('floating-text-value').join(' ');
@@ -168,7 +161,7 @@ export class Floater extends LitElement {
     span.style.top = "0";
     span.style.left = "0";
     span.style.fontSize =
-      this.getRandomNumberInRange(this.userInput.minTextSize, this.userInput.maxTextSize) + "px";
+      this.getRandomNumberInRange(this.userInput.minTextSizeInPx, this.userInput.maxTextSizeInPx) + "px";
     span.style.color = this.userInput.colors
       ? this.userInput.colors![this.getRandomNumberInRange(0, this.userInput.colors.length - 1)]
       : "#000000";
@@ -181,10 +174,11 @@ export class Floater extends LitElement {
    * Sets container overflow to hidden
    * calls createuserInput.dataWordElements to create a node for every element in array
    * add all created nodes to an container/array
+   ** TODO: call this onload of component(after getting data) 
    */
-  createListOnLoad() {
+  createMovableListOnLoad() {
     this.PARENT_ELEMENT.style.overflow = "hidden";
-    this.userInput.data.map((element) => this.createDataWordElements(element));
+    this.userInput.data.map((element) => this.createMovableElementForText(element));
     this.textValuesContainer = Array.from(
       this.querySelectorAll(".floating-text-value")
     );
