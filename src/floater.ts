@@ -32,6 +32,7 @@ export class Floater extends LitElement {
   initialSpaceAvailableForLetter: Array<any>;
   continuousAnimationInterval: any;
   initialSpaceCalculation:boolean = false;
+  CLASS_NAME_FOR_FLOAT_ELEMENTS = "floating-text-value";
 
   /*
    * Functions
@@ -155,8 +156,8 @@ export class Floater extends LitElement {
       this.userInput.startTransitionTimeInMs + "ms " + this.userInput.transitionName;
     span.innerHTML = word.replaceAll(" ", "&nbsp");
     // TODO: check for userInput.classes array
-    // span.className = classList.push('floating-text-value').join(' ');
-    span.className = "floating-text-value";
+    // span.className = this.userInput.classes.push(this.CLASS_NAME_FOR_FLOAT_ELEMENTS).join(" ");
+    span.className = this.CLASS_NAME_FOR_FLOAT_ELEMENTS;
     span.style.position = "relative";
     span.style.top = "0";
     span.style.left = "0";
@@ -180,7 +181,7 @@ export class Floater extends LitElement {
     this.PARENT_ELEMENT.style.overflow = "hidden";
     this.userInput.data.map((element) => this.createMovableElementForText(element));
     this.textValuesContainer = Array.from(
-      this.querySelectorAll(".floating-text-value")
+      this.querySelectorAll(this.CLASS_NAME_FOR_FLOAT_ELEMENTS)
     );
   }
 
