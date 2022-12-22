@@ -37,9 +37,9 @@ export default class Floater extends LitElement {
   /*
    * Variables
    */
-  private PARENT_ELEMENT: any = this.querySelector(this.containerSelector);
-  private textValuesContainer: Array<any>;
-  private  initialSpaceAvailableForLetter: Array<any>;
+  private PARENT_ELEMENT: any;
+  private textValuesContainer: Array<any> = [];
+  private initialSpaceAvailableForLetter: Array<any> = [];
   private continuousAnimationInterval: any;
   private initialSpaceCalculation: boolean = false;
   private CLASS_NAME_FOR_FLOAT_ELEMENTS = "floating-text-value";
@@ -47,6 +47,7 @@ export default class Floater extends LitElement {
 
   constructor() {
     super();
+    this.PARENT_ELEMENT = this.querySelector(this.containerSelector);
     this.createMovableListOnLoad();
   }
 
@@ -189,7 +190,7 @@ export default class Floater extends LitElement {
     this.PARENT_ELEMENT.style.overflow = "hidden";
     this.data.map((element) => this.createMovableElementForText(element));
     this.textValuesContainer = Array.from(
-      this.querySelectorAll(this.CLASS_NAME_FOR_FLOAT_ELEMENTS)
+      this.querySelectorAll("." + this.CLASS_NAME_FOR_FLOAT_ELEMENTS)
     );
   }
 
