@@ -37,13 +37,13 @@ export default class Floater extends LitElement {
   /*
    * Variables
    */
-  PARENT_ELEMENT: any = this.querySelector(this.containerSelector);
-  textValuesContainer: Array<any>;
-  initialSpaceAvailableForLetter: Array<any>;
-  continuousAnimationInterval: any;
-  initialSpaceCalculation: boolean = false;
-  CLASS_NAME_FOR_FLOAT_ELEMENTS = "floating-text-value";
-  COLOR_BLACK = "#000";
+  private PARENT_ELEMENT: any = this.querySelector(this.containerSelector);
+  private textValuesContainer: Array<any>;
+  private  initialSpaceAvailableForLetter: Array<any>;
+  private continuousAnimationInterval: any;
+  private initialSpaceCalculation: boolean = false;
+  private CLASS_NAME_FOR_FLOAT_ELEMENTS = "floating-text-value";
+  private COLOR_BLACK = "#000";
 
   connectedCallback() {
     super.connectedCallback();
