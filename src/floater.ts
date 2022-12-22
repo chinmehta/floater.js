@@ -45,8 +45,8 @@ export default class Floater extends LitElement {
   private CLASS_NAME_FOR_FLOAT_ELEMENTS = "floating-text-value";
   private COLOR_BLACK = "#000";
 
-  connectedCallback() {
-    super.connectedCallback();
+  constructor() {
+    super();
     this.createMovableListOnLoad();
   }
 
